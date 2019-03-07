@@ -26,6 +26,7 @@ typedef struct		s_cam
 	double			beta;
 	double			gamma;
 	double			zoom;
+	int				iso;
 }					t_cam;
 
 typedef struct		s_dim

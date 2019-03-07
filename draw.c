@@ -27,7 +27,7 @@ void 	draw_line(t_dim p1, t_dim p2, t_mlx *mlx)
 	cur = p1;
 	while (cur.x != p2.x || cur.y != p2.y)
 	{
-		mlx_pixel_put(mlx->mlx, mlx->win, cur.x, cur.y, 9999900);
+		mlx_pixel_put(mlx->mlx, mlx->win, cur.x, cur.y, 9999900); //2550000 is babyblauw
 		e[1] = e[0] * 2;
 		if (e[1] > -delta.y)
 		{

@@ -24,6 +24,22 @@ int deal_key(int key, t_mlx *mlx)
 		mlx->cam->beta += 0.05;
 	else if (key == 123)
 		mlx->cam->beta -= 0.05;
+	else if (key == 49 && mlx->cam->iso == 0)
+	{
+		mlx->cam->iso = 1;
+		mlx->cam->alpha = 0;
+		mlx->cam->beta = 0;
+		mlx->cam->gamma = 0;
+		mlx->cam->zoom = 30;
+	}
+	else if (key == 49 && mlx->cam->iso == 1)
+	{
+		mlx->cam->iso = 0;
+		mlx->cam->alpha = 0;
+		mlx->cam->beta = 0;
+		mlx->cam->gamma = 0;
+		mlx->cam->zoom = 30;
+	}
 	return (0);
 }
 

@@ -30,10 +30,11 @@ t_dim	ft_rot_matrix(t_dim p, t_mlx *mlx)
 	p = rotate_x(p, mlx);
 	p = rotate_y(p, mlx);
 	p = rotate_z(p, mlx);
+	if (mlx->cam->iso == 1)
+		iso(&p.x, &p.y, p.z);
 	p.x += ft_width_window(mlx) / 2;
 	p.y += ft_height_window(mlx) / 2;
 	//printf("x: %d\n y: %d\n", p.x, p.y);
-	//iso(&p.x, &p.y, p.z);
 	return (p);
 }
 
