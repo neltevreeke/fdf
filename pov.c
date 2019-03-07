@@ -6,11 +6,15 @@
 /*   By: nvreeke <nvreeke@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/02/28 13:57:22 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/03/07 16:20:55 by nvreeke       ########   odam.nl         */
+/*   Updated: 2019/03/07 17:21:41 by nvreeke       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+/*
+**	Calculates the ISO projection
+*/
 
 static void iso(int *x, int *y, int z)
 {
@@ -23,6 +27,10 @@ static void iso(int *x, int *y, int z)
     *y = -z + (previous_x + previous_y) * sin(0.523599);
 }
 
+/*
+**	Rotation matrix calculation 
+*/
+
 t_dim	ft_rot_matrix(t_dim p, t_mlx *mlx)
 {
 	p.x -= (mlx->size_x * mlx->cam->zoom) / 2;
@@ -32,7 +40,6 @@ t_dim	ft_rot_matrix(t_dim p, t_mlx *mlx)
 	p = rotate_z(p, mlx);
 	p.x += ft_width_window(mlx) / 2;
 	p.y += ft_height_window(mlx) / 2;
-	//printf("x: %d\n y: %d\n", p.x, p.y);
 	//iso(&p.x, &p.y, p.z);
 	return (p);
 }

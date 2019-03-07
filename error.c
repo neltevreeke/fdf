@@ -6,11 +6,15 @@
 /*   By: nvreeke <nvreeke@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/02/28 13:48:41 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/02/28 13:49:00 by nvreeke       ########   odam.nl         */
+/*   Updated: 2019/03/07 17:22:00 by nvreeke       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+/*
+**	Catches errors and puts them in terminal
+*/
 
 void	ft_error(int argc, char **argv)
 {

@@ -6,11 +6,15 @@
 /*   By: nvreeke <nvreeke@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/02/28 13:51:14 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/03/05 16:27:05 by nvreeke       ########   odam.nl         */
+/*   Updated: 2019/03/07 17:19:01 by nvreeke       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+/*
+**	Malloc Integer array with appropriate size
+*/
 
 void	ft_malloc_tab(char *str, t_mlx *mlx)
 {
@@ -39,6 +43,10 @@ void	ft_malloc_tab(char *str, t_mlx *mlx)
 	return ;
 }
 
+/*
+**	Checks for a negative number
+*/
+
 int		isnegnumber(char *line)
 {
 	if (*line == '-')
@@ -53,13 +61,18 @@ int		isnegnumber(char *line)
 		return (0);
 }
 
+/*
+**	Fills the array with the integers received from get next line function
+*/
+
+// uit deze functie komt de malloc double free error. Mogelijke relatie met verkeerd inlezen map
+
 void	ft_fill_tab(t_mlx *mlx, char *src)
 {
 	char *line;
 	int fd;
 	int i;
 	int j;
-
 	j = 0;
 	fd = open(src, O_RDONLY);
 	while (get_next_line(fd, &line) == 1)

@@ -6,7 +6,7 @@
 /*   By: nvreeke <nvreeke@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/02/22 12:35:52 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/03/04 13:07:49 by nvreeke       ########   odam.nl         */
+/*   Updated: 2019/03/07 17:20:55 by nvreeke       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ int		main(int argc, char **argv)
 	mlx->cam->beta = 0;
 	mlx->cam->gamma = 0;
 	mlx->cam->zoom = 30;
-	ft_error(argc, argv);
+	ft_error(argc, argv);;
 	ft_malloc_tab(argv[1], mlx);
-	ft_fill_tab(mlx, argv[1]);
-	ft_window(mlx);
+	ft_fill_tab(mlx, argv[1]);							// Malloc error sometimes (1/20 keer ongeveer);
+	ft_window(mlx);										// segfault (redelijk vaak, major bug);
 	return (0);
 }

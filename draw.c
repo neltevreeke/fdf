@@ -6,11 +6,15 @@
 /*   By: nvreeke <nvreeke@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/02/28 13:52:17 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/03/07 16:23:13 by nvreeke       ########   odam.nl         */
+/*   Updated: 2019/03/07 17:20:41 by nvreeke       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+/*
+**	Algorithm to draw a line in the window
+*/
 
 void 	draw_line(t_dim p1, t_dim p2, t_mlx *mlx)
 {
@@ -42,6 +46,10 @@ void 	draw_line(t_dim p1, t_dim p2, t_mlx *mlx)
 	}
 }
 
+/*
+**	Calculates the dimensions needed for our zoom
+*/
+
 t_dim set_dim(t_dim p, t_mlx *mlx, int x, int y)
 {
 	p.x = x * mlx->cam->zoom;
@@ -49,6 +57,10 @@ t_dim set_dim(t_dim p, t_mlx *mlx, int x, int y)
 	p.z = mlx->map[y][x] * (mlx->cam->zoom / 3);
 	return (p);
 }
+
+/*
+**	Draws the map into the window
+*/
 
 int draw_map(t_mlx *mlx)
 {
