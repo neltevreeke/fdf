@@ -70,6 +70,7 @@ void	ft_fill_tab(t_mlx *mlx, char *src)
 			if (ft_isdigit(*line) == 1 || isnegnumber(line) == 1)
 			{
 				mlx->map[j][i] = ft_atoi(line);
+				printf("%d\n", mlx->map[j][i]);
 				i++;
 			}
 			while (*line != ' ' && *line != '\0' && *line != '\t')
