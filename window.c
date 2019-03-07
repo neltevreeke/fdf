@@ -16,6 +16,8 @@ int ft_width_window(t_mlx *mlx)
 {
 	int width;
 	width = mlx->size_x * 30 + 150;
+	if (width > 1000)
+		width = 1000;
 	return (width);
 }
 
@@ -23,6 +25,8 @@ int ft_height_window(t_mlx *mlx)
 {
 	int height;
 	height = mlx->size_y * 30 + 150;
+	if (height > 1000)
+		height = 1000;
 	return (height);
 }
 
