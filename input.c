@@ -39,6 +39,20 @@ void	ft_malloc_tab(char *str, t_mlx *mlx)
 	return ;
 }
 
+int		isnegnumber(char *line)
+{
+	if (*line == '-')
+	{
+		line++;
+		if (ft_isdigit(*line) == 1)
+			return (1);
+		else
+			return (0);
+	}
+	else
+		return (0);
+}
+
 void	ft_fill_tab(t_mlx *mlx, char *src)
 {
 	char *line;
@@ -53,7 +67,7 @@ void	ft_fill_tab(t_mlx *mlx, char *src)
 		i = 0;
 		while (*line)
 		{
-			if (ft_isdigit(*line) == 1)
+			if (ft_isdigit(*line) == 1 || isnegnumber(line) == 1)
 			{
 				mlx->map[j][i] = ft_atoi(line);
 				i++;
