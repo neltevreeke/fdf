@@ -6,7 +6,7 @@
 /*   By: nvreeke <nvreeke@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/02/28 13:51:14 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/03/07 17:19:01 by nvreeke       ########   odam.nl         */
+/*   Updated: 2019/03/07 17:28:08 by nvreeke       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,9 @@ void	ft_fill_tab(t_mlx *mlx, char *src)
 				mlx->map[j][i] = ft_atoi(line);
 				i++;
 			}
+			line++;
 			while (*line != ' ' && *line != '\0' && *line != '\t')
 				line++;
-			line++;
 			if (*line == '\0')
 			 	break ;
 		}
