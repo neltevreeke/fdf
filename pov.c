@@ -6,7 +6,7 @@
 /*   By: nvreeke <nvreeke@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/02/28 13:57:22 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/03/05 15:24:02 by nvreeke       ########   odam.nl         */
+/*   Updated: 2019/03/07 16:20:55 by nvreeke       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,8 @@ static void iso(int *x, int *y, int z)
 
 t_dim	ft_rot_matrix(t_dim p, t_mlx *mlx)
 {
-	//mlx->cam-> = (double)(PI / 4);
-	p.x -= (mlx->size_x * 30) / 2;
-	p.y -= (mlx->size_y * 30) / 2;
+	p.x -= (mlx->size_x * mlx->cam->zoom) / 2;
+	p.y -= (mlx->size_y * mlx->cam->zoom) / 2;
 	p = rotate_x(p, mlx);
 	p = rotate_y(p, mlx);
 	p = rotate_z(p, mlx);

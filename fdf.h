@@ -6,7 +6,7 @@
 /*   By: nvreeke <nvreeke@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/02/27 15:35:39 by wvan-dam       #+#    #+#                */
-/*   Updated: 2019/03/05 18:06:49 by nvreeke       ########   odam.nl         */
+/*   Updated: 2019/03/07 16:23:40 by nvreeke       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,10 @@ t_dim				ft_rot_matrix(t_dim p, t_mlx *mlx);
 t_dim				rotate_x(t_dim p, t_mlx *mlx);
 t_dim				rotate_y(t_dim p, t_mlx *mlx);
 t_dim				rotate_z(t_dim p, t_mlx *mlx);
+t_dim				set_dim(t_dim p, t_mlx *mlx, int x, int y);
 void				draw_line(t_dim p1, t_dim p2, t_mlx *mlx);
 int					ft_width_window(t_mlx *mlx);
 int					ft_height_window(t_mlx *mlx);
+int					draw_map(t_mlx *mlx);
 
 #endif

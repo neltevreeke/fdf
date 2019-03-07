@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   draw_line.c                                        :+:    :+:            */
+/*   draw.c                                             :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: nvreeke <nvreeke@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/02/28 13:52:17 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/03/05 15:25:20 by nvreeke       ########   odam.nl         */
+/*   Updated: 2019/03/07 16:23:13 by nvreeke       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,43 @@ void 	draw_line(t_dim p1, t_dim p2, t_mlx *mlx)
 			cur.y += s.y;
 		}
 	}
+}
+
+t_dim set_dim(t_dim p, t_mlx *mlx, int x, int y)
+{
+	p.x = x * mlx->cam->zoom;
+	p.y = y * mlx->cam->zoom;
+	p.z = mlx->map[y][x] * (mlx->cam->zoom / 3);
+	return (p);
+}
+
+int draw_map(t_mlx *mlx)
+{
+	t_dim p1;
+	t_dim p2;
+	int x;
+	int y;
+
+	y = 0;
+	mlx_clear_window(mlx->mlx, mlx->win);
+	while (y < mlx->size_y)
+	{
+		x = 0;
+		while (x < mlx->size_x)
+		{
+			p1 = set_dim(p1, mlx, x, y);
+			p2 = set_dim(p2, mlx, x + 1, y);
+			p1 = ft_rot_matrix(p1, mlx);
+			p2 = ft_rot_matrix(p2, mlx);
+			if (x + 1 < mlx->size_x)
+				draw_line(p1, p2, mlx);
+			p2 = set_dim(p2, mlx, x, y + 1);
+			p2 = ft_rot_matrix(p2, mlx);
+			if (y + 1 < mlx->size_y)
+				draw_line(p1, p2, mlx);
+			x++;
+		}
+		y++;
+	}
+	return (0);
 }
