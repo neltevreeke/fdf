@@ -6,7 +6,7 @@
 /*   By: nvreeke <nvreeke@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/02/28 13:51:14 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/03/10 11:41:42 by nvreeke       ########   odam.nl         */
+/*   Updated: 2019/03/10 15:32:28 by nvreeke       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,26 +71,35 @@ void	ft_fill_tab(t_mlx *mlx, char *src)
 	int fd;
 	int i;
 	int j;
+	int count;
+	int first_count;
 
 	j = 0;
+	count = 0;
 	fd = open(src, O_RDONLY);
 	while (get_next_line(fd, &line) == 1)
 	{
 		i = 0;
 		while (*line)
 		{
+			if (*line == '\0')
+			 	break ;
 			if (ft_isdigit(*line) == 1 || isnegnumber(line) == 1)
 			{
 				mlx->map[j][i] = ft_atoi(line);
 				printf("%d\n", mlx->map[j][i]);
 				i++;
+				count++;
 			}
 			while (*line != ' ' && *line != '\0' && *line != '\t')
 				line++;
-			line++;
-			if (*line == '\0')
-			 	break ;
+			if (*line == ' ' || *line == '\t' || *line == '\0')
+				line++;
 		}
+		if (first_count != count)
+			first_count = count;
+		else
+				
 		j++;
 	}
 	close(fd);
