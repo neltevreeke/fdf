@@ -6,11 +6,15 @@
 /*   By: nvreeke <nvreeke@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/03/07 16:02:01 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/03/07 16:12:24 by nvreeke       ########   odam.nl         */
+/*   Updated: 2019/03/10 11:42:09 by nvreeke       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+/*
+** Deals with key events
+*/
 
 int deal_key(int key, t_mlx *mlx)
 {
@@ -42,6 +46,10 @@ int deal_key(int key, t_mlx *mlx)
 	}
 	return (0);
 }
+
+/*
+** Deals with mouse events
+*/
 
 int deal_mouse(int button, int x, int y, t_mlx *mlx)
 {

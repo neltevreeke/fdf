@@ -6,11 +6,15 @@
 /*   By: nvreeke <nvreeke@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/02/28 13:51:14 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/03/05 16:27:05 by nvreeke       ########   odam.nl         */
+/*   Updated: 2019/03/10 11:41:42 by nvreeke       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+/*
+** Mallocs 2d int array
+*/
 
 void	ft_malloc_tab(char *str, t_mlx *mlx)
 {
@@ -39,6 +43,10 @@ void	ft_malloc_tab(char *str, t_mlx *mlx)
 	return ;
 }
 
+/*
+** Checks if input is a negative number
+*/
+
 int		isnegnumber(char *line)
 {
 	if (*line == '-')
@@ -52,6 +60,10 @@ int		isnegnumber(char *line)
 	else
 		return (0);
 }
+
+/*
+** Fills the 2d array with the input
+*/
 
 void	ft_fill_tab(t_mlx *mlx, char *src)
 {
