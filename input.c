@@ -6,7 +6,7 @@
 /*   By: nvreeke <nvreeke@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/02/28 13:51:14 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/03/10 15:32:28 by nvreeke       ########   odam.nl         */
+/*   Updated: 2019/03/11 12:29:21 by nvreeke       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,19 +75,18 @@ void	ft_fill_tab(t_mlx *mlx, char *src)
 	int first_count;
 
 	j = 0;
-	count = 0;
 	fd = open(src, O_RDONLY);
-	while (get_next_line(fd, &line) == 1)
+	while (get_next_line(fd, &line))
 	{
 		i = 0;
+		count = 0;
 		while (*line)
 		{
-			if (*line == '\0')
+			if (*line == '\0' || count == mlx->size_x)
 			 	break ;
 			if (ft_isdigit(*line) == 1 || isnegnumber(line) == 1)
 			{
 				mlx->map[j][i] = ft_atoi(line);
-				printf("%d\n", mlx->map[j][i]);
 				i++;
 				count++;
 			}
@@ -96,11 +95,14 @@ void	ft_fill_tab(t_mlx *mlx, char *src)
 			if (*line == ' ' || *line == '\t' || *line == '\0')
 				line++;
 		}
-		if (first_count != count)
-			first_count = count;
-		else
-				
 		j++;
+		if (first_count == 0)
+			first_count = count;
+		else if (first_count != count)
+		{
+			ft_putendl("Found wrong line length. Exiting.");
+			exit(1);
+		}
 	}
 	close(fd);
 	return ;
