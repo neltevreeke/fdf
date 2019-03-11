@@ -6,7 +6,7 @@
 /*   By: nvreeke <nvreeke@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/02/28 13:51:14 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/03/11 12:29:21 by nvreeke       ########   odam.nl         */
+/*   Updated: 2019/03/11 13:06:10 by nvreeke       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,15 @@ void	ft_malloc_tab(char *str, t_mlx *mlx)
 	mlx->map = NULL;
 	col = 0;
 	fd = open(str, O_RDONLY);
-	while (get_next_line(fd, &line) == 1)
+	while (get_next_line(fd, &line))
 	{
 		col++;
 		row = ft_wordcount(line, ' ');
 	}
 	mlx->size_x = row;
 	mlx->size_y = col;
+	printf("row: %d\n", row);
+	printf("col: %d\n", col);
 	mlx->map = (int**)malloc(sizeof(int*) * col);
 	while (col >= 0)
 	{
@@ -80,6 +82,7 @@ void	ft_fill_tab(t_mlx *mlx, char *src)
 	{
 		i = 0;
 		count = 0;
+		printf("LOLOLOL\n");
 		while (*line)
 		{
 			if (*line == '\0' || count == mlx->size_x)
@@ -96,14 +99,13 @@ void	ft_fill_tab(t_mlx *mlx, char *src)
 				line++;
 		}
 		j++;
-		if (first_count == 0)
-			first_count = count;
-		else if (first_count != count)
-		{
-			ft_putendl("Found wrong line length. Exiting.");
-			exit(1);
-		}
+		// printf("count: %d\n", count);
+		// printf("x: %d\n", mlx->size_x);
+		// if (count == mlx->size_x - 1)
+		// 	ft_error_2();
 	}
+	printf("hier gaan we nooit komen...\n");
 	close(fd);
+	printf("hier gaan we nooit komen huuuuuuuh...\n");
 	return ;
 }

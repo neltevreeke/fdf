@@ -6,7 +6,7 @@
 /*   By: nvreeke <nvreeke@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/02/27 15:35:39 by wvan-dam       #+#    #+#                */
-/*   Updated: 2019/03/11 11:34:41 by nvreeke       ########   odam.nl         */
+/*   Updated: 2019/03/11 12:41:52 by nvreeke       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct		s_mlx
 }					t_mlx;
 
 void				ft_error(int argc, char **argv);
-void				ft_error_2(int first_count, int count);
+void				ft_error_2(void);
 void				ft_window(t_mlx *mlx);
 int					deal_mouse(int button, int x, int y, t_mlx *mlx);
 int					deal_key(int key, t_mlx *mlx);

@@ -6,7 +6,7 @@
 /*   By: nvreeke <nvreeke@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/02/28 13:52:17 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/03/10 11:43:03 by nvreeke       ########   odam.nl         */
+/*   Updated: 2019/03/11 13:14:15 by nvreeke       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,15 +77,19 @@ int draw_map(t_mlx *mlx)
 		while (x < mlx->size_x)
 		{
 			p1 = set_dim(p1, mlx, x, y);
-			p2 = set_dim(p2, mlx, x + 1, y);
 			p1 = ft_rot_matrix(p1, mlx);
-			p2 = ft_rot_matrix(p2, mlx);
 			if (x + 1 < mlx->size_x)
+			{
+				p2 = set_dim(p2, mlx, x + 1, y);
+				p2 = ft_rot_matrix(p2, mlx);
 				draw_line(p1, p2, mlx);
-			p2 = set_dim(p2, mlx, x, y + 1);
-			p2 = ft_rot_matrix(p2, mlx);
+			}
 			if (y + 1 < mlx->size_y)
+			{
+				p2 = set_dim(p2, mlx, x, y + 1);
+				p2 = ft_rot_matrix(p2, mlx);
 				draw_line(p1, p2, mlx);
+			}
 			x++;
 		}
 		y++;
