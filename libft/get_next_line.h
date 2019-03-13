@@ -15,7 +15,7 @@
 
 # include <fcntl.h>
 
-# define BUFF_SIZE 1
+# define BUFF_SIZE 1000
 # define MALLOCCHECK(x) if (!x) return (-1);
 
 int						get_next_line(const int fd, char **line);

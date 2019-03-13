@@ -34,6 +34,7 @@ typedef struct		s_dim
 	int 			x;
 	int 			y;
 	int				z;
+	int				color;
 }					t_dim;
 
 typedef struct		s_mlx
@@ -62,5 +63,6 @@ void				draw_line(t_dim p1, t_dim p2, t_mlx *mlx);
 int					ft_width_window(t_mlx *mlx);
 int					ft_height_window(t_mlx *mlx);
 int					draw_map(t_mlx *mlx);
+void				no_file(void);
 
 #endif

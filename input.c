@@ -23,23 +23,26 @@ void	ft_malloc_tab(char *str, t_mlx *mlx)
 	int col;
 	int row;
 
-	mlx->map = NULL;
 	col = 0;
 	fd = open(str, O_RDONLY);
+	if (fd < 0)
+		no_file();
 	while (get_next_line(fd, &line))
 	{
 		col++;
 		row = ft_wordcount(line, ' ');
+		free(line);
 	}
+	free(line);
 	mlx->size_x = row;
 	mlx->size_y = col;
 	printf("row: %d\n", row);
 	printf("col: %d\n", col);
 	mlx->map = (int**)malloc(sizeof(int*) * col);
-	while (col >= 0)
+	while (col > 0)
 	{
-		mlx->map[col] = (int*)malloc(sizeof(int) * row);
 		col--;
+		mlx->map[col] = (int*)malloc(sizeof(int) * row);
 	}
 	close(fd);
 	return ;
@@ -70,19 +73,21 @@ int		isnegnumber(char *line)
 void	ft_fill_tab(t_mlx *mlx, char *src)
 {
 	char *line;
+	char *tmp;
 	int fd;
 	int i;
 	int j;
-	int count;
+	size_t count;
 	int first_count;
 
 	j = 0;
 	fd = open(src, O_RDONLY);
 	while (get_next_line(fd, &line))
 	{
+		tmp = line;
+		printf("line: %p\n", line);
 		i = 0;
 		count = 0;
-		printf("LOLOLOL\n");
 		while (*line)
 		{
 			if (*line == '\0' || count == mlx->size_x)
@@ -99,13 +104,14 @@ void	ft_fill_tab(t_mlx *mlx, char *src)
 				line++;
 		}
 		j++;
+		free(tmp);
 		// printf("count: %d\n", count);
 		// printf("x: %d\n", mlx->size_x);
 		// if (count == mlx->size_x - 1)
 		// 	ft_error_2();
 	}
-	printf("hier gaan we nooit komen...\n");
+	free(line);
 	close(fd);
-	printf("hier gaan we nooit komen huuuuuuuh...\n");
 	return ;
 }
+

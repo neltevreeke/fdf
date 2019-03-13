@@ -12,9 +12,43 @@
 
 #include "fdf.h"
 
+
 /*
 ** Draws a line on the screen
 */
+double percent(int start, int end, int current)
+{
+    double placement;
+    double distance;
+
+    placement = current - start;
+    distance = end - start;
+    return ((distance == 0) ? 1.0 : (placement / distance));
+}
+
+int get_light(int start, int end, double percentage)
+{
+    return ((int)((1 - percentage) * start + percentage * end));
+}
+
+int get_color(t_dim current, t_dim start, t_dim end, t_dim delta)
+{
+    int     red;
+    int     green;
+    int     blue;
+    double  percentage;
+
+    if (current.color == end.color)
+        return (current.color);
+    if (delta.x > delta.y)
+        percentage = percent(start.x, end.x, current.x);
+    else
+        percentage = percent(start.y, end.y, current.y);
+    red = get_light((start.color >> 16) & 0xFF, (end.color >> 16) & 0xFF, percentage);
+    green = get_light((start.color >> 8) & 0xFF, (end.color >> 8) & 0xFF, percentage);
+    blue = get_light(start.color & 0xFF, end.color & 0xFF, percentage);
+    return ((red << 16) | (green << 8) | blue);
+}
 
 void 	draw_line(t_dim p1, t_dim p2, t_mlx *mlx)
 {
@@ -31,7 +65,7 @@ void 	draw_line(t_dim p1, t_dim p2, t_mlx *mlx)
 	cur = p1;
 	while (cur.x != p2.x || cur.y != p2.y)
 	{
-		mlx_pixel_put(mlx->mlx, mlx->win, cur.x, cur.y, 9999900); //2550000 is babyblauw
+		mlx_pixel_put(mlx->mlx, mlx->win, cur.x, cur.y, get_color(cur, p1, p2, delta)); //2550000 is babyblauw 9999900
 		e[1] = e[0] * 2;
 		if (e[1] > -delta.y)
 		{
@@ -55,6 +89,14 @@ t_dim set_dim(t_dim p, t_mlx *mlx, int x, int y)
 	p.x = x * mlx->cam->zoom;
 	p.y = y * mlx->cam->zoom;
 	p.z = mlx->map[y][x] * (mlx->cam->zoom / 3);
+	if (mlx->map[y][x] > 4 && mlx->map[y][x] < 10)
+		p.color = 0x424242;
+	else if (mlx->map[y][x] >= 10)
+		p.color = 0xFFFFFF;
+	else if (mlx->map[y][x] <= 0)
+		p.color = 30251;
+	else
+		p.color = 606000;
 	return (p);
 }
 

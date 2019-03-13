@@ -30,3 +30,9 @@ void	ft_error_2(void)
 	ft_putendl("Found wrong line length. Exiting.");
 	exit(1);
 }
+
+void	no_file(void)
+{
+	ft_putendl("File doesn't exist or you don't have the right permissions.");
+	exit(1);
+}
