@@ -6,7 +6,7 @@
 /*   By: nvreeke <nvreeke@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/02/28 13:48:41 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/03/11 12:41:37 by nvreeke       ########   odam.nl         */
+/*   Updated: 2019/03/14 12:49:11 by nvreeke       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_error(int argc, char **argv)
 	}
 }
 
-void	ft_error_2(void)
+void	ft_wrong_line_len(void)
 {
 	ft_putendl("Found wrong line length. Exiting.");
 	exit(1);

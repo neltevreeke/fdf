@@ -6,7 +6,7 @@
 /*   By: nvreeke <nvreeke@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/02/28 13:51:14 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/03/11 13:06:10 by nvreeke       ########   odam.nl         */
+/*   Updated: 2019/03/14 14:09:20 by nvreeke       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,27 @@ void	ft_malloc_tab(char *str, t_mlx *mlx)
 	int row;
 
 	col = 0;
+	row = 0;
 	fd = open(str, O_RDONLY);
 	if (fd < 0)
 		no_file();
 	while (get_next_line(fd, &line))
 	{
-		col++;
-		row = ft_wordcount(line, ' ');
+		if (!col)
+			col = ft_wordcount(line, ' ');
+		else if (col != ft_wordcount(line, ' '))
+			ft_wrong_line_len();
+		row++;
 		free(line);
 	}
 	free(line);
-	mlx->size_x = row;
-	mlx->size_y = col;
-	mlx->map = (int**)malloc(sizeof(int*) * col);
-	while (col > 0)
+	mlx->size_x = col;
+	mlx->size_y = row;
+	mlx->map = (int**)malloc(sizeof(int*) * row);
+	while (row > 0)
 	{
-		col--;
-		mlx->map[col] = (int*)malloc(sizeof(int) * row);
+		row--;
+		mlx->map[row] = (int*)malloc(sizeof(int) * col);
 	}
 	close(fd);
 	return ;
@@ -75,8 +79,6 @@ void	ft_fill_tab(t_mlx *mlx, char *src)
 	int fd;
 	int i;
 	int j;
-	size_t count;
-	int first_count;
 
 	j = 0;
 	fd = open(src, O_RDONLY);
@@ -84,20 +86,18 @@ void	ft_fill_tab(t_mlx *mlx, char *src)
 	{
 		tmp = line;
 		i = 0;
-		count = 0;
 		while (*line)
 		{
-			if (*line == '\0' || count == mlx->size_x)
+			if (*line == '\0')
 			 	break ;
 			if (ft_isdigit(*line) == 1 || isnegnumber(line) == 1)
 			{
 				mlx->map[j][i] = ft_atoi(line);
 				i++;
-				count++;
 			}
 			while (*line != ' ' && *line != '\0' && *line != '\t')
 				line++;
-			if (*line == ' ' || *line == '\t' || *line == '\0')
+			if (*line == ' ' || *line == '\t')
 				line++;
 		}
 		j++;
