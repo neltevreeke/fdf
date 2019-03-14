@@ -36,8 +36,6 @@ void	ft_malloc_tab(char *str, t_mlx *mlx)
 	free(line);
 	mlx->size_x = row;
 	mlx->size_y = col;
-	printf("row: %d\n", row);
-	printf("col: %d\n", col);
 	mlx->map = (int**)malloc(sizeof(int*) * col);
 	while (col > 0)
 	{
@@ -85,7 +83,6 @@ void	ft_fill_tab(t_mlx *mlx, char *src)
 	while (get_next_line(fd, &line))
 	{
 		tmp = line;
-		printf("line: %p\n", line);
 		i = 0;
 		count = 0;
 		while (*line)
@@ -105,13 +102,8 @@ void	ft_fill_tab(t_mlx *mlx, char *src)
 		}
 		j++;
 		free(tmp);
-		// printf("count: %d\n", count);
-		// printf("x: %d\n", mlx->size_x);
-		// if (count == mlx->size_x - 1)
-		// 	ft_error_2();
 	}
 	free(line);
 	close(fd);
 	return ;
 }
-
