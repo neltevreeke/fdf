@@ -64,5 +64,8 @@ int					ft_width_window(t_mlx *mlx);
 int					ft_height_window(t_mlx *mlx);
 int					draw_map(t_mlx *mlx);
 void				no_file(void);
+double				percent(int start, int end, int current);
+int					get_light(int start, int end, double percentage);
+int					get_color(t_dim current, t_dim start, t_dim end, t_dim delta);
 
 #endif
