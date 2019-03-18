@@ -6,7 +6,7 @@
 /*   By: nvreeke <nvreeke@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/02/28 13:49:35 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/03/18 13:53:37 by nvreeke       ########   odam.nl         */
+/*   Updated: 2019/03/18 17:35:32 by nvreeke       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ void		ft_window(t_mlx *mlx)
 	window = mlx_new_window(mlx->mlx, ft_width_window(mlx),
 	ft_height_window(mlx), "Neltes & Wouters fdf project");
 	mlx->win = window;
-	draw_map(mlx);
+	mlx->img = mlx_new_image(mlx->mlx, ft_width_window(mlx), ft_height_window(mlx));
+	mlx->data_addr = mlx_get_data_addr(mlx->img, &(mlx->bits_in_pixel), &(mlx->size_line), &(mlx->endian));
 	mlx_hook(mlx->win, 2, 1L << 2, deal_key, mlx);
 	mlx_hook(mlx->win, 4, 1L << 1, deal_mouse, mlx);
 	mlx_loop_hook(mlx->mlx, &draw_map, mlx);

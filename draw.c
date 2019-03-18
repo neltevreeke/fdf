@@ -6,7 +6,7 @@
 /*   By: nvreeke <nvreeke@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/02/28 13:52:17 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/03/18 15:14:10 by nvreeke       ########   odam.nl         */
+/*   Updated: 2019/03/18 17:42:18 by nvreeke       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,19 @@
 /*
 ** Calculates delta for x and y axis
 */
+
+static void			put_pixel_to_img(int x, int y, t_mlx *mlx, int color)
+{
+	int i;
+
+	if (x > 0 && x < ft_width_window(mlx) && y > 0 && y < ft_height_window(mlx->mlx))
+	{
+		i = (x * mlx->bits_in_pixel / 8) + (y * mlx->size_line);
+		mlx->data_addr[i] = color;
+		mlx->data_addr[++i] = color >> 8;
+		mlx->data_addr[++i] = color >> 16;
+	}
+}
 
 static t_dim		set_delta(t_dim p1, t_dim p2, t_dim delta)
 {
@@ -55,8 +68,9 @@ static void			draw_line(t_dim p1, t_dim p2, t_mlx *mlx)
 	cur = p1;
 	while (cur.x != p2.x || cur.y != p2.y)
 	{
-		mlx_pixel_put(mlx->mlx, mlx->win, cur.x,
-		cur.y, get_color(cur, p1, p2, delta));
+		put_pixel_to_img(cur.x, cur.y, mlx, get_color(cur, p1, p2, delta));
+		//mlx_pixel_put(mlx->mlx, mlx->win, cur.x,
+		//cur.y, get_color(cur, p1, p2, delta));
 		e[1] = e[0] * 2;
 		if (e[1] > -delta.y)
 		{
@@ -126,12 +140,13 @@ int					draw_map(t_mlx *mlx)
 	int		y;
 
 	y = 0;
-	mlx_clear_window(mlx->mlx, mlx->win);
+	ft_bzero(mlx->data_addr, (ft_height_window(mlx) * ft_width_window(mlx)) * (mlx->bits_in_pixel / 8));
 	while (y < mlx->size_y)
 	{
 		x = 0;
 		draw_map_2(x, y, mlx);
 		y++;
 	}
+	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img, 0, 0);
 	return (0);
 }
