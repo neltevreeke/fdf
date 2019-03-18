@@ -6,7 +6,7 @@
 /*   By: nvreeke <nvreeke@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/02/28 13:57:22 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/03/10 11:40:25 by nvreeke       ########   odam.nl         */
+/*   Updated: 2019/03/18 13:00:41 by nvreeke       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,22 @@
 ** Calculates Isometric view
 */
 
-static void iso(int *x, int *y, int z)
+static void		iso(int *x, int *y, int z)
 {
-    int previous_x;
-    int previous_y;
+	int			previous_x;
+	int			previous_y;
 
-    previous_x = *x;
-    previous_y = *y;
-    *x = (previous_x - previous_y) * cos(0.523599);
-    *y = -z + (previous_x + previous_y) * sin(0.523599);
+	previous_x = *x;
+	previous_y = *y;
+	*x = (previous_x - previous_y) * cos(0.523599);
+	*y = -z + (previous_x + previous_y) * sin(0.523599);
 }
 
 /*
 ** Calculates new corners for all the lines, x, y & z.
 */
 
-t_dim	ft_rot_matrix(t_dim p, t_mlx *mlx)
+t_dim			ft_rot_matrix(t_dim p, t_mlx *mlx)
 {
 	p.x -= (mlx->size_x * mlx->cam->zoom) / 2;
 	p.y -= (mlx->size_y * mlx->cam->zoom) / 2;
@@ -45,7 +45,7 @@ t_dim	ft_rot_matrix(t_dim p, t_mlx *mlx)
 	return (p);
 }
 
-t_dim	rotate_x(t_dim p, t_mlx *mlx)
+t_dim			rotate_x(t_dim p, t_mlx *mlx)
 {
 	int tmp_y;
 
@@ -55,7 +55,7 @@ t_dim	rotate_x(t_dim p, t_mlx *mlx)
 	return (p);
 }
 
-t_dim	rotate_y(t_dim p, t_mlx *mlx)
+t_dim			rotate_y(t_dim p, t_mlx *mlx)
 {
 	int tmp_x;
 
@@ -65,7 +65,7 @@ t_dim	rotate_y(t_dim p, t_mlx *mlx)
 	return (p);
 }
 
-t_dim	rotate_z(t_dim p, t_mlx *mlx)
+t_dim			rotate_z(t_dim p, t_mlx *mlx)
 {
 	int tmp_x;
 	int tmp_y;

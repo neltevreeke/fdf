@@ -6,19 +6,18 @@
 /*   By: nvreeke <nvreeke@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/02/27 15:35:39 by wvan-dam       #+#    #+#                */
-/*   Updated: 2019/03/14 12:52:18 by nvreeke       ########   odam.nl         */
+/*   Updated: 2019/03/18 15:39:56 by nvreeke       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
-#define FDF_H
-#define PI 3.14159265358979323846
+# define FDF_H
+# define PI 3.14159265358979323846
 
-#include "./minilibx_macos/mlx.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include "./libft/libft.h"
-#include <math.h>
+# include "./minilibx_macos/mlx.h"
+# include <stdlib.h>
+# include "./libft/libft.h"
+# include <math.h>
 
 typedef struct		s_cam
 {
@@ -31,8 +30,8 @@ typedef struct		s_cam
 
 typedef struct		s_dim
 {
-	int 			x;
-	int 			y;
+	int				x;
+	int				y;
 	int				z;
 	int				color;
 }					t_dim;
@@ -44,7 +43,7 @@ typedef struct		s_mlx
 	int				size_y;
 	void			*win;
 	void			*mlx;
-	struct s_cam 	*cam;
+	struct s_cam	*cam;
 }					t_mlx;
 
 /*
@@ -84,8 +83,16 @@ t_dim				set_dim(t_dim p, t_mlx *mlx, int x, int y);
 **	Line drawing (algorithm) functions
 */
 
-void				draw_line(t_dim p1, t_dim p2, t_mlx *mlx);
 int					draw_map(t_mlx *mlx);
+
+/*
+**	Color functions
+*/
+
+double				percent(int start, int end, int current);
+int					get_light(int start, int end, double percentage);
+int					get_color(t_dim current, t_dim start,
+t_dim end, t_dim delta);
 
 /*
 **	Dynamic window functions
@@ -93,14 +100,5 @@ int					draw_map(t_mlx *mlx);
 
 int					ft_width_window(t_mlx *mlx);
 int					ft_height_window(t_mlx *mlx);
-<<<<<<< HEAD
-
-=======
-int					draw_map(t_mlx *mlx);
-void				no_file(void);
-double				percent(int start, int end, int current);
-int					get_light(int start, int end, double percentage);
-int					get_color(t_dim current, t_dim start, t_dim end, t_dim delta);
->>>>>>> 0f006b06ae69dc9a29228d1831d1c87a5e3d1190
 
 #endif

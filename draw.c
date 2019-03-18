@@ -6,20 +6,24 @@
 /*   By: nvreeke <nvreeke@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/02/28 13:52:17 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/03/11 13:14:15 by nvreeke       ########   odam.nl         */
+/*   Updated: 2019/03/18 15:14:10 by nvreeke       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static t_dim	set_delta(t_dim p1, t_dim p2, t_dim delta)
+/*
+** Calculates delta for x and y axis
+*/
+
+static t_dim		set_delta(t_dim p1, t_dim p2, t_dim delta)
 {
 	delta.x = abs(p2.x - p1.x);
 	delta.y = abs(p2.y - p1.y);
 	return (delta);
 }
 
-static t_dim	set_s(t_dim p1, t_dim p2, t_dim s)
+static t_dim		set_s(t_dim p1, t_dim p2, t_dim s)
 {
 	if (p1.x < p2.x)
 		s.x = 1;
@@ -38,7 +42,7 @@ static t_dim	set_s(t_dim p1, t_dim p2, t_dim s)
 ** Draws a line on the screen
 */
 
-void			draw_line(t_dim p1, t_dim p2, t_mlx *mlx)
+static void			draw_line(t_dim p1, t_dim p2, t_mlx *mlx)
 {
 	t_dim	delta;
 	t_dim	s;
@@ -51,7 +55,8 @@ void			draw_line(t_dim p1, t_dim p2, t_mlx *mlx)
 	cur = p1;
 	while (cur.x != p2.x || cur.y != p2.y)
 	{
-		mlx_pixel_put(mlx->mlx, mlx->win, cur.x, cur.y, get_color(cur, p1, p2, delta));
+		mlx_pixel_put(mlx->mlx, mlx->win, cur.x,
+		cur.y, get_color(cur, p1, p2, delta));
 		e[1] = e[0] * 2;
 		if (e[1] > -delta.y)
 		{
@@ -70,7 +75,7 @@ void			draw_line(t_dim p1, t_dim p2, t_mlx *mlx)
 ** Sets dimensions for x, y & z
 */
 
-t_dim			set_dim(t_dim p, t_mlx *mlx, int x, int y)
+t_dim				set_dim(t_dim p, t_mlx *mlx, int x, int y)
 {
 	p.x = x * mlx->cam->zoom;
 	p.y = y * mlx->cam->zoom;
@@ -90,10 +95,33 @@ t_dim			set_dim(t_dim p, t_mlx *mlx, int x, int y)
 ** Draws the full map onto screen
 */
 
-int				draw_map(t_mlx *mlx)
+static void			draw_map_2(int x, int y, t_mlx *mlx)
 {
 	t_dim	p1;
 	t_dim	p2;
+
+	while (x < mlx->size_x)
+	{
+		p1 = set_dim(p1, mlx, x, y);
+		p1 = ft_rot_matrix(p1, mlx);
+		if (x + 1 < mlx->size_x)
+		{
+			p2 = set_dim(p2, mlx, x + 1, y);
+			p2 = ft_rot_matrix(p2, mlx);
+			draw_line(p1, p2, mlx);
+		}
+		if (y + 1 < mlx->size_y)
+		{
+			p2 = set_dim(p2, mlx, x, y + 1);
+			p2 = ft_rot_matrix(p2, mlx);
+			draw_line(p1, p2, mlx);
+		}
+		x++;
+	}
+}
+
+int					draw_map(t_mlx *mlx)
+{
 	int		x;
 	int		y;
 
@@ -102,24 +130,7 @@ int				draw_map(t_mlx *mlx)
 	while (y < mlx->size_y)
 	{
 		x = 0;
-		while (x < mlx->size_x)
-		{
-			p1 = set_dim(p1, mlx, x, y);
-			p1 = ft_rot_matrix(p1, mlx);
-			if (x + 1 < mlx->size_x)
-			{
-				p2 = set_dim(p2, mlx, x + 1, y);
-				p2 = ft_rot_matrix(p2, mlx);
-				draw_line(p1, p2, mlx);
-			}
-			if (y + 1 < mlx->size_y)
-			{
-				p2 = set_dim(p2, mlx, x, y + 1);
-				p2 = ft_rot_matrix(p2, mlx);
-				draw_line(p1, p2, mlx);
-			}
-			x++;
-		}
+		draw_map_2(x, y, mlx);
 		y++;
 	}
 	return (0);

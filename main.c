@@ -6,18 +6,18 @@
 /*   By: nvreeke <nvreeke@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/02/22 12:35:52 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/03/04 13:07:49 by nvreeke       ########   odam.nl         */
+/*   Updated: 2019/03/18 12:58:37 by nvreeke       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int		main(int argc, char **argv)
+int			main(int argc, char **argv)
 {
-	int **tab;
-	void *mlx_ptr;
-	t_mlx *mlx;
-	t_cam *cam;
+	int		**tab;
+	void	*mlx_ptr;
+	t_mlx	*mlx;
+	t_cam	*cam;
 
 	mlx = (t_mlx*)malloc(sizeof(t_mlx));
 	mlx_ptr = mlx_init();

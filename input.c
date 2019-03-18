@@ -6,7 +6,7 @@
 /*   By: nvreeke <nvreeke@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/02/28 13:51:14 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/03/14 14:09:20 by nvreeke       ########   odam.nl         */
+/*   Updated: 2019/03/18 14:20:15 by nvreeke       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,23 @@
 ** Mallocs 2d int array
 */
 
-void	ft_malloc_tab(char *str, t_mlx *mlx)
+void		ft_malloc_tab2(int row, int col, t_mlx *mlx, int fd)
 {
-	char *line;
-	int fd;
-	int col;
-	int row;
+	mlx->map = (int**)malloc(sizeof(int*) * row);
+	while (row > 0)
+	{
+		row--;
+		mlx->map[row] = (int*)malloc(sizeof(int) * col);
+	}
+	close(fd);
+}
+
+void		ft_malloc_tab(char *str, t_mlx *mlx)
+{
+	char	*line;
+	int		fd;
+	int		col;
+	int		row;
 
 	col = 0;
 	row = 0;
@@ -40,21 +51,14 @@ void	ft_malloc_tab(char *str, t_mlx *mlx)
 	free(line);
 	mlx->size_x = col;
 	mlx->size_y = row;
-	mlx->map = (int**)malloc(sizeof(int*) * row);
-	while (row > 0)
-	{
-		row--;
-		mlx->map[row] = (int*)malloc(sizeof(int) * col);
-	}
-	close(fd);
-	return ;
+	ft_malloc_tab2(row, col, mlx, fd);
 }
 
 /*
 ** Checks if input is a negative number
 */
 
-int		isnegnumber(char *line)
+int			isnegnumber(char *line)
 {
 	if (*line == '-')
 	{
@@ -72,24 +76,20 @@ int		isnegnumber(char *line)
 ** Fills the 2d array with the input
 */
 
-void	ft_fill_tab(t_mlx *mlx, char *src)
+void		ft_fill_tab(t_mlx *mlx, char *src)
 {
-	char *line;
-	char *tmp;
-	int fd;
-	int i;
-	int j;
+	char	*line;
+	int		fd;
+	int		i;
+	int		j;
 
 	j = 0;
 	fd = open(src, O_RDONLY);
 	while (get_next_line(fd, &line))
 	{
-		tmp = line;
 		i = 0;
 		while (*line)
 		{
-			if (*line == '\0')
-			 	break ;
 			if (ft_isdigit(*line) == 1 || isnegnumber(line) == 1)
 			{
 				mlx->map[j][i] = ft_atoi(line);
@@ -97,13 +97,10 @@ void	ft_fill_tab(t_mlx *mlx, char *src)
 			}
 			while (*line != ' ' && *line != '\0' && *line != '\t')
 				line++;
-			if (*line == ' ' || *line == '\t')
-				line++;
+			line = *line ? line + 1 : line;
 		}
 		j++;
-		free(tmp);
 	}
 	free(line);
 	close(fd);
-	return ;
 }
