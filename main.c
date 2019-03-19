@@ -6,11 +6,12 @@
 /*   By: nvreeke <nvreeke@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/02/22 12:35:52 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/03/18 17:33:23 by nvreeke       ########   odam.nl         */
+/*   Updated: 2019/03/19 14:51:45 by nvreeke       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include <stdio.h>
 
 int			main(int argc, char **argv)
 {

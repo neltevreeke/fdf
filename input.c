@@ -6,7 +6,7 @@
 /*   By: nvreeke <nvreeke@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/02/28 13:51:14 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/03/18 14:20:15 by nvreeke       ########   odam.nl         */
+/*   Updated: 2019/03/19 14:51:52 by nvreeke       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,25 @@ int			isnegnumber(char *line)
 ** Fills the 2d array with the input
 */
 
+void		while_fill(char *line, int j, int i, t_mlx *mlx)
+{
+	while (*line)
+	{
+		if (ft_isdigit(*line) == 1 || isnegnumber(line) == 1)
+		{
+			mlx->map[j][i] = ft_atoi(line);
+			i++;
+		}
+		while (*line != ' ' && *line != '\0' && *line != '\t')
+			line++;
+		line = *line ? line + 1 : line;
+	}
+}
+
 void		ft_fill_tab(t_mlx *mlx, char *src)
 {
 	char	*line;
+	char	*tmp;
 	int		fd;
 	int		i;
 	int		j;
@@ -87,19 +103,11 @@ void		ft_fill_tab(t_mlx *mlx, char *src)
 	fd = open(src, O_RDONLY);
 	while (get_next_line(fd, &line))
 	{
+		tmp = line;
 		i = 0;
-		while (*line)
-		{
-			if (ft_isdigit(*line) == 1 || isnegnumber(line) == 1)
-			{
-				mlx->map[j][i] = ft_atoi(line);
-				i++;
-			}
-			while (*line != ' ' && *line != '\0' && *line != '\t')
-				line++;
-			line = *line ? line + 1 : line;
-		}
+		while_fill(line, j, i, mlx);
 		j++;
+		free(tmp);
 	}
 	free(line);
 	close(fd);
