@@ -30,6 +30,7 @@ int			main(int argc, char **argv)
 	mlx->cam->gamma = 0;
 	mlx->cam->zoom = 30;
 	mlx->cam->iso = 0;
+	mlx->cam->press = 0;
 	ft_error(argc, argv);
 	ft_malloc_tab(argv[1], mlx);
 	ft_fill_tab(mlx, argv[1]);

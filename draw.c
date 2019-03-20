@@ -42,12 +42,10 @@ static t_dim		set_s(t_dim p1, t_dim p2, t_dim s)
 		s.x = 1;
 	else
 		s.x = -1;
-	s.x = p1.x < p2.x ? 1 : -1;
 	if (p1.y < p2.y)
 		s.y = 1;
 	else
 		s.y = -1;
-	s.y = p1.y < p2.y ? 1 : -1;
 	return (s);
 }
 
@@ -69,8 +67,6 @@ static void			draw_line(t_dim p1, t_dim p2, t_mlx *mlx)
 	while (cur.x != p2.x || cur.y != p2.y)
 	{
 		put_pixel_to_img(cur.x, cur.y, mlx, get_color(cur, p1, p2, delta));
-		//mlx_pixel_put(mlx->mlx, mlx->win, cur.x,
-		//cur.y, get_color(cur, p1, p2, delta));
 		e[1] = e[0] * 2;
 		if (e[1] > -delta.y)
 		{

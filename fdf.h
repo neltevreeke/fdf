@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include "./libft/libft.h"
 # include <math.h>
+# include <stdio.h>
 
 typedef struct		s_cam
 {
@@ -26,6 +27,7 @@ typedef struct		s_cam
 	double			gamma;
 	double			zoom;
 	int				iso;
+	int				press;
 }					t_cam;
 
 typedef struct		s_dim
@@ -70,6 +72,8 @@ void				no_file(void);
 
 int					deal_mouse(int button, int x, int y, t_mlx *mlx);
 int					deal_key(int key, t_mlx *mlx);
+int					deal_move(int x, int y, t_mlx *mlx);
+int					deal_mouse_release(int button, int x, int y, t_mlx *mlx);
 
 /*
 **	integer array functions

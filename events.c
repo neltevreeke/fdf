@@ -60,5 +60,24 @@ int		deal_mouse(int button, int x, int y, t_mlx *mlx)
 		mlx->cam->zoom += 0.02 * mlx->cam->zoom;
 	if (button == 4)
 		mlx->cam->zoom -= 0.02 * mlx->cam->zoom;
+	if (button == 1)
+		mlx->cam->press = 1;
+	return (0);
+}
+
+int		deal_mouse_release(int button, int x, int y, t_mlx *mlx)
+{
+	if (button == 1)
+		mlx->cam->press = 0;
+	return (0);
+}
+
+int		deal_move(int x, int y, t_mlx *mlx)
+{
+	if (mlx->cam->press == 1)
+	{
+		mlx->cam->beta = x * 0.005;
+		mlx->cam->alpha = y * 0.005;
+	}
 	return (0);
 }
