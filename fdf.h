@@ -6,7 +6,7 @@
 /*   By: nvreeke <nvreeke@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/02/27 15:35:39 by wvan-dam       #+#    #+#                */
-/*   Updated: 2019/03/18 17:18:04 by nvreeke       ########   odam.nl         */
+/*   Updated: 2019/03/20 12:35:15 by nvreeke       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,21 @@ typedef struct		s_mlx
 	struct s_cam	*cam;
 
 	/*
-	**				IMG STUFF BABYYYYYY
+	**				image stuff
 	*/
+
 	void			*img;
 	char			*data_addr;
 	int				bits_in_pixel;
 	int				size_line;
 	int				endian;
+
+	/*
+	**				Mouse stuff
+	*/
+
+	int				last_x;
+	int				last_y;
 }					t_mlx;
 
 /*

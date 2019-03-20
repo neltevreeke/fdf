@@ -6,7 +6,7 @@
 /*   By: nvreeke <nvreeke@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/03/07 16:02:01 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/03/18 17:40:13 by nvreeke       ########   odam.nl         */
+/*   Updated: 2019/03/20 12:50:06 by nvreeke       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,16 @@ int		deal_move(int x, int y, t_mlx *mlx)
 {
 	if (mlx->cam->press == 1)
 	{
-		mlx->cam->beta = x * 0.005;
-		mlx->cam->alpha = y * 0.005;
+		if (mlx->last_x < x)
+			mlx->cam->beta += 0.03;
+		if (mlx->last_x > x)
+			mlx->cam->beta -= 0.03;
+		if (mlx->last_y < y)
+			mlx->cam->alpha -= 0.03;
+		if (mlx->last_y > y)
+			mlx->cam->alpha += 0.03;
 	}
+	mlx->last_x = x;
+	mlx->last_y = y;
 	return (0);
 }
