@@ -6,7 +6,7 @@
 /*   By: nvreeke <nvreeke@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/03/07 16:02:01 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/03/20 12:50:06 by nvreeke       ########   odam.nl         */
+/*   Updated: 2019/03/20 12:52:17 by nvreeke       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int		deal_key(int key, t_mlx *mlx)
 }
 
 /*
-** Deals with mouse events
+**	Deals with mouse events (zoom)
 */
 
 int		deal_mouse(int button, int x, int y, t_mlx *mlx)
@@ -65,12 +65,20 @@ int		deal_mouse(int button, int x, int y, t_mlx *mlx)
 	return (0);
 }
 
+/*
+**	Deals with mouse events (On release)
+*/
+
 int		deal_mouse_release(int button, int x, int y, t_mlx *mlx)
 {
 	if (button == 1)
 		mlx->cam->press = 0;
 	return (0);
 }
+
+/*
+**	Deals with mouse events (Pressed down)
+*/
 
 int		deal_move(int x, int y, t_mlx *mlx)
 {
