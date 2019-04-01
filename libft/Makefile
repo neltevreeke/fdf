@@ -47,14 +47,14 @@ OBJ =   ft_memset.o ft_bzero.o ft_memcpy.o ft_memccpy.o ft_memmove.o \
 all: $(NAME)
 
 $(NAME):
-	$(CC) $(FLAGS) -c $(SRC)
-	ar rc $(NAME) $(OBJ)
-	ranlib $(NAME)
+	@$(CC) $(FLAGS) -c $(SRC)
+	@ar rc $(NAME) $(OBJ)
+	@ranlib $(NAME)
 
 clean:
-	rm -rf $(OBJ)
+	@rm -rf $(OBJ)
 
 fclean: clean
-	rm -rf $(NAME)
+	@rm -rf $(NAME)
 
 re: fclean all

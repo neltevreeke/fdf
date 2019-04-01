@@ -39,8 +39,10 @@ void		ft_window(t_mlx *mlx)
 	window = mlx_new_window(mlx->mlx, ft_width_window(mlx),
 	ft_height_window(mlx), "Neltes & Wouters fdf project");
 	mlx->win = window;
-	mlx->img = mlx_new_image(mlx->mlx, ft_width_window(mlx), ft_height_window(mlx));
-	mlx->data_addr = mlx_get_data_addr(mlx->img, &(mlx->bits_in_pixel), &(mlx->size_line), &(mlx->endian));
+	mlx->img = mlx_new_image(mlx->mlx,
+	ft_width_window(mlx), ft_height_window(mlx));
+	mlx->data_addr = mlx_get_data_addr(mlx->img, &(mlx->bits_in_pixel),
+	&(mlx->size_line), &(mlx->endian));
 	mlx_hook(mlx->win, 2, 1L << 2, deal_key, mlx);
 	mlx_hook(mlx->win, 4, 1L << 1, deal_mouse, mlx);
 	mlx_hook(mlx->win, 6, 1L << 8, deal_move, mlx);

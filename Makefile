@@ -11,7 +11,8 @@
 # **************************************************************************** #
 
 BINARY = fdf
-SRCS = *.c
+SRCS = colors.c draw.c error.c events.c input.c main.c map.c pov.c window.c
+OBJ = colors.o draw.o error.o events.o input.o main.o map.o pov.o window.o
 FLAGS = -L minilibx_macos/ -lmlx -framework OpenGL -framework AppKit -o $(BINARY)
 GCC = gcc
 LIBS = ./libft/libft.a
@@ -19,12 +20,23 @@ LIBS = ./libft/libft.a
 all: $(BINARY)
 
 $(BINARY):
-	$(GCC) -g $(SRCS) -I/usr/X11/includes $(FLAGS) $(LIBS)
+	@echo "Compiling libraries and binary..."
+	@make -C libft/
+	@make -C minilibx_macos/
+	@$(GCC) -g $(SRCS) -I/usr/X11/includes $(FLAGS) $(LIBS)
+	@echo "Compiling Succesful."
 
 clean:
-	rm -rf *.o
+	@echo "Cleaning object files..."
+	@rm -rf $(OBJ)
+	@make clean -C libft/
+	@make clean -C minilibx_macos/
+	@echo "Cleaning succesful."
 
 fclean: clean
-	rm -rf $(BINARY)
+	@echo "Removing libraries and binary..."
+	@rm -rf $(BINARY)
+	@make fclean -C libft/
+	@echo "Removing succesful."
 
 re: fclean all

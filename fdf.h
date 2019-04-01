@@ -46,21 +46,11 @@ typedef struct		s_mlx
 	void			*win;
 	void			*mlx;
 	struct s_cam	*cam;
-
-	/*
-	**				image stuff
-	*/
-
 	void			*img;
 	char			*data_addr;
 	int				bits_in_pixel;
 	int				size_line;
 	int				endian;
-
-	/*
-	**				Mouse stuff
-	*/
-
 	int				last_x;
 	int				last_y;
 }					t_mlx;
@@ -104,6 +94,7 @@ t_dim				set_dim(t_dim p, t_mlx *mlx, int x, int y);
 **	Line drawing (algorithm) functions
 */
 
+void				draw_line(t_dim p1, t_dim p2, t_mlx *mlx);
 int					draw_map(t_mlx *mlx);
 
 /*
